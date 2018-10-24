@@ -1,10 +1,11 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int fib(int x){
-	/*  The program runs the recursive
-		Fibonacci sequence 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134, ...
-		which was devised by Fibonacci (1170 ad - 1250 ad), 
+int fib(int x, vector<bool>& isknown, vector<int>& fibval){
+	/*  The program runs the recursive Fibonacci sequence with memo-ization
+		0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134, ...
+		Th eoriginal was devised by Fibonacci (1170 ad - 1250 ad), 
 		who used this to model the breeding of pairs of rabbits. 
 
 		pre: n is a small positive integoer
@@ -13,19 +14,21 @@ int fib(int x){
 		fib(1) = 1
 		fib(x) = fib(x - 1) + fib(x - 2)  for x >= 2 */
 
-	if (x > 1) { 
-		cout << x << " ";
-		return (fib(x - 1) + fib(x - 2));
+	if (x >= 0) { 
+
+		if (isknown[x]) {
+			return fibval[x];
+		}
+		else{
+			cout << x << " ";
+			isknown[x] = true;
+
+			fibval[x] = (fib(x - 1, isknown, fibval) + fib(x - 2, isknown, fibval));
+			return fibval[x];
+		}
 	}
-	else {
-		if (x == 1) {
-			cout << x << " ";
-			return 1;
-		}
-		else { // x <= 0
-			cout << x << " ";
+	else { // x <= 0
 			return 0;
-		}
 	}
 }
 
@@ -36,8 +39,16 @@ int main(){
 
 	cout << "Enter a small positive integer: ";
 	cin >> n;
+
+	vector<bool> isknown(n+1, false); //initialize vector
+	vector<int> fibval(n+1);
+	isknown[0] = true;
+	isknown[1] = true;
+	fibval[0] = 0;
+	fibval[1] = 1;
+
 	cout << "Here are the function calls: ";
-	cout << "\nFibonacci of " << n << " is " << fib(n) << "." << endl;
+	cout << "\nFibonacci of " << n << " is " << fib(n, isknown, fibval) << "." << endl;
 
 	cin >> stop; //to keep window open in certain cases
 
