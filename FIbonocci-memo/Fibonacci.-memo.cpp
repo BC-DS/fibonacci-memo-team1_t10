@@ -1,3 +1,6 @@
+/* An implementation of the Fibonacci sequence WITH memoization
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -5,7 +8,7 @@ using namespace std;
 int fib(int x, vector<bool>& isknown, vector<int>& fibval){
 	/*  The program runs the recursive Fibonacci sequence with memo-ization
 		0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 134, ...
-		Th eoriginal was devised by Fibonacci (1170 ad - 1250 ad), 
+		The original was devised by Fibonacci (1170 ad - 1250 ad), 
 		who used this to model the breeding of pairs of rabbits. 
 
 		pre: n is a small positive integoer
