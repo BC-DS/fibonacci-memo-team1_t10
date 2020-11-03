@@ -38,9 +38,9 @@ int fib(int x, vector<bool>& isknown, vector<int>& fibval){
 int main(){
 
 	char stop;
-	int n;
+	int n, ans;
 
-	cout << "Enter a small positive integer: ";
+	cout << "\nEnter a small positive integer: ";
 	cin >> n;
 
 	vector<bool> isknown(n+1, false); //initialize vector
@@ -49,9 +49,11 @@ int main(){
 	isknown[1] = true;
 	fibval[0] = 0;
 	fibval[1] = 1;
-
+	
 	cout << "Here are the function calls: ";
-	cout << "\nFibonacci of " << n << " is " << fib(n, isknown, fibval) << "." << endl;
+	ans = fib(n, isknown, fibval);
+
+	cout << "\nFibonacci of " << n << " is " << ans << "." << endl;
 
 	cin >> stop; //to keep window open in certain cases
 
